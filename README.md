@@ -45,7 +45,7 @@ import (
   "fmt"
   "github.com/pocke/go-minisat"
   "math/rand"
-	"time"
+  "time"
 )
 
 func main() {
