@@ -42,20 +42,24 @@ Usage
 package main
 
 import (
+  "fmt"
   "github.com/pocke/go-minisat"
+  "math/rand"
+	"time"
 )
 
 func main() {
-  s := minisat.NewSolver()
-  v1 := minisat.NewVar()
-  v2 := minisat.NewVar()
+  rand.Seed(time.Now().UnixNano())
+  s := minisat.NewSolver(rand.Float64())
+  v1 := s.NewVar()
+  v2 := s.NewVar()
   s.AddClause(v1, v2)
   s.AddClause(v1, v2.Not())
   s.AddClause(v1.Not(), v2.Not())
-  s.Solve()  // => true
+  fmt.Println(s.Solve())  // => true
 
-  s.ModelValue(v1)  // => true, nil
-  s.ModelValue(v2)  // => false, nil
+  fmt.Println(s.ModelValue(v1))  // => true, nil
+  fmt.Println(s.ModelValue(v2))  // => false, nil
 }
 ```
 
